@@ -1,6 +1,6 @@
 /* Base */
 .btn {
-     @apply font-bold py-2 px-4 rounded;
+    @apply inline-block font-bold py-2 px-4 rounded no-underline cursor-pointer leading-none;
 }
 .btn:focus {
     @apply outline-none shadow-outline;
@@ -16,10 +16,15 @@
 
 /* Secondary */
 .btn-secondary {
-    @apply bg-grey-lighter;
+    @apply font-normal bg-grey-light text-grey-darkest;
 }
 .btn-secondary:hover {
-    @apply bg-grey-light;
+    @apply bg-grey;
+}
+
+/* Sizes */
+.btn-lg {
+    @apply py-4 px-6;
 }
 
 /* Link */

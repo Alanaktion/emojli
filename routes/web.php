@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/{any}', 'AppController@app')->where('any', '.*');
+Route::get('/{any}', 'SpaController@app')->where('any', '.*');

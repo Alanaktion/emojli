@@ -1,13 +1,25 @@
 <template>
     <div>
-        <div v-if="user && user.name">
-            <h1>{{ user.name }}</h1>
-            <p>{{ user.username }}</p>
-            <p>{{ user.email }}</p>
-        </div>
-        <div v-else>
-            <h1>Loading user&hellip;</h1>
-        </div>
+        <template v-if="user !== null && page">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h1 class="mb-2">{{ user.username }}</h1>
+                    <p>Joined {{ user.created_at | fromNow }}</p>
+                </div>
+                <div v-if="$auth.user().username == user.username">
+                    <button type="button" @click="$auth.logout({ redirect: '/' })" class="btn btn-secondary">
+                        Log out
+                    </button>
+                </div>
+            </div>
+
+            <post-card class="mb-4"
+                v-for="post in posts" :key="post.id" :post="post"
+            ></post-card>
+        </template>
+        <template v-else>
+            <!-- Loading -->
+        </template>
     </div>
 </template>
 
@@ -16,34 +28,61 @@ export default {
     props: ['username'],
     metaInfo() {
         return {
-            name: this.user && this.user.name,
+            username: this.user && this.user.username,
         };
     },
     data() {
         return {
             user: null,
-            endpoint: 'https://jsonplaceholder.typicode.com/users/',
+            endpoint: '/users/',
+            posts: [],
+            page: 0,
+            nextPage: null,
         }
+    },
+    filters: {
+        fromNow(date) {
+            return moment.utc(date).fromNow();
+        },
     },
     methods: {
         getUser(username) {
-            axios(this.endpoint + '?username=' + encodeURIComponent(username))
+            this.user = null;
+            axios(this.endpoint + encodeURI(username))
                 .then(response => {
-                    this.user = _.first(response.data)
+                    this.user = response.data
                 })
                 .catch(error => {
                     console.error(error)
                 })
-        }
+        },
+        getPosts(username) {
+            this.posts = [];
+            this.page = 0;
+            this.nextPage = null;
+            axios(this.endpoint + encodeURI(username) + '/posts')
+                .then(response => {
+                    let { data } = response
+                    this.posts = data.data
+                    this.page = data.current_page
+                    this.nextPage = data.next_page_url
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+        },
+        addPost(post) {
+            this.posts.unshift(post)
+        },
     },
-
     created() {
         this.getUser(this.username);
+        this.getPosts(this.username);
     },
     watch: {
         '$route'() {
-            this.user = null;
             this.getUser(this.username);
+            this.getPosts(this.username);
         }
     }
 }

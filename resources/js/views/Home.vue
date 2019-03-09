@@ -1,18 +1,9 @@
 <template>
     <div>
-        <h2 class="my-6">Timeline</h2>
-        <div class="max-w-sm bg-white rounded shadow-lg mb-4"
-            v-for="post in firstPosts" :key="post.id">
-            <div class="px-6 py-4">
-                <router-link class="block text-grey-darker text-xl mb-2 no-underline"
-                    :to="`/posts/${post.id}`">
-                    {{ post.title }}
-                </router-link>
-                <p class="text-base">
-                    {{ post.body }}
-                </p>
-            </div>
-        </div>
+        <h2 class="my-6">Home</h2>
+        <post-card class="mb-4"
+            v-for="post in posts" :key="post.id" :post="post"
+        ></post-card>
     </div>
 </template>
 
@@ -21,24 +12,27 @@ export default {
     data() {
         return {
             posts: [],
-            endpoint: 'https://jsonplaceholder.typicode.com/posts',
+            endpoint: '/posts',
+            page: 0,
+            nextPage: null,
         }
-    },
-    computed: {
-        firstPosts() {
-            return _.slice(this.posts, 0, 25)
-        },
     },
     methods: {
         getPosts() {
             axios(this.endpoint)
                 .then(response => {
-                    this.posts = response.data
+                    let { data } = response
+                    this.posts = data.data
+                    this.page = data.current_page
+                    this.nextPage = data.next_page_url
                 })
                 .catch(error => {
                     console.error(error)
                 })
-        }
+        },
+        addPost(post) {
+            this.posts.unshift(post)
+        },
     },
     created() {
         this.getPosts()

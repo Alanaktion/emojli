@@ -1,0 +1,9 @@
+.alert {
+    @apply border-l-4 px-4 py-3 shadow-md mb-4;
+}
+.alert-error {
+    @apply bg-red-lightest border-red-light text-red-dark;
+}
+.alert-success {
+    @apply bg-teal-lightest border-teal text-teal-darkest;
+}

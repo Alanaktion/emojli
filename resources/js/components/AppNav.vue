@@ -15,20 +15,23 @@
                 </router-link>
             </div>
             <div class="flex items-center" v-if="$auth.check()">
-                <div class="text-teal-lightest mr-4">
+                <router-link :to="`/users/${$auth.user().username}`" class="nav-link">
                     {{ $auth.user().username }}
-                </div>
-                <div @click.prevent="$auth.logout()" class="nav-btn">
-                    Log out
+                </router-link>
+                <div @click="post" class="btn btn-nav">
+                    Post
                 </div>
             </div>
-            <div v-else>
+            <div v-else-if="$auth.ready()">
                 <router-link to="/login" class="nav-link">
                     Sign in
                 </router-link>
-                <router-link to="/register" class="nav-btn">
+                <router-link to="/register" class="btn btn-nav">
                     Join
                 </router-link>
+            </div>
+            <div v-else class="btn btn-nav invisible" aria-hidden="true">
+                Loading&hellip;
             </div>
         </div>
     </nav>
@@ -36,6 +39,10 @@
 
 <script>
 export default {
-    //
+    methods: {
+        post() {
+            this.$root.$refs.postModal.show()
+        },
+    },
 }
 </script>

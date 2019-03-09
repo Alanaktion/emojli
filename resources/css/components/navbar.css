@@ -21,9 +21,9 @@
 }
 
 /* Navbar Buttons */
-.nav-btn {
-    @apply inline-block text-sm no-underline px-4 py-2 leading-none border rounded text-white border-white;
+.btn-nav {
+    @apply text-sm border text-white border-white;
 }
-.nav-btn:hover {
+.btn-nav:hover {
     @apply border-transparent text-teal bg-white;
 }

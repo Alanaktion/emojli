@@ -90,7 +90,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Refresh a token.
+     * Refresh a JWT token.
      *
      * Actual token refreshing is handled by the route's middleware.
      *

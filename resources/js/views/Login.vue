@@ -1,7 +1,10 @@
 <template>
-    <div class="w-full max-w-xs mx-auto xl:mt-32">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            @submit.prevent="login" method="post">
+    <div class="w-full max-w-xs mx-auto md:mt-24">
+        <div class="alert alert-error" v-if="error" role="alert">
+            Invalid username or password. Try again.
+        </div>
+
+        <form class="card p-8" @submit.prevent="login" method="post">
             <div class="mb-4">
                 <label class="label" for="username">
                     Username
@@ -42,8 +45,12 @@ export default {
                     username: this.username,
                     password: this.password,
                 },
-                success: () => {},
-                error: () => {},
+                success: () => {
+                    this.error = false
+                },
+                error: () => {
+                    this.error = true
+                },
                 rememberMe: true,
                 redirect: '/home',
                 fetchUser: true,

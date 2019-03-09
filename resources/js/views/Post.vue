@@ -1,13 +1,9 @@
 <template>
     <div>
-        <div v-if="post && post.title">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.body }}</p>
-            <p>{{ post.id }}</p>
-        </div>
-        <div v-else>
-            <p>Loading post&hellip;</p>
-        </div>
+        <post-card class="mt-6" :post="post" v-if="post !== null"></post-card>
+        <template v-else>
+            <!-- Loading -->
+        </template>
     </div>
 </template>
 
@@ -16,13 +12,13 @@ export default {
     props: ['id'],
     metaInfo() {
         return {
-            title: this.post && this.post.title,
+            body: this.post && this.post.body,
         };
     },
     data() {
         return {
             post: null,
-            endpoint: 'https://jsonplaceholder.typicode.com/posts/',
+            endpoint: '/posts/',
         }
     },
     methods: {
@@ -36,7 +32,6 @@ export default {
                 })
         }
     },
-
     created() {
         this.getPost(this.id);
     },
