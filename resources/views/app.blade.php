@@ -17,11 +17,16 @@
         <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
         <meta name="theme-color" content="#4dc0b5">
     </head>
-    <body class="bg-grey-darkest text-grey-lighter">
+    <body class="bg-grey-lighter text-grey-darker">
         <div id="app">
             <app-nav></app-nav>
-            <div class="container mx-auto my-4">
-                <router-view></router-view>
+            <div class="container my-4">
+                <div v-if="$auth.ready()">
+                    <router-view></router-view>
+                </div>
+                <div v-if="!$auth.ready()">
+                    Loading&hellip;
+                </div>
             </div>
         </div>
     </body>

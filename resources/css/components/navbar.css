@@ -1,0 +1,29 @@
+/* Navbar */
+.navbar {
+    @apply sticky pin-t bg-teal py-6 select-none;
+}
+.nav-container {
+    @apply flex items-center justify-between flex-wrap;
+}
+.nav-brand {
+    @apply font-semibold text-xl tracking-tight text-white no-underline;
+}
+
+/* Navbar Links */
+.nav-link {
+    @apply text-sm text-teal-lightest mr-4 no-underline;
+}
+.nav-link:hover {
+    @apply text-white underline;
+}
+.nav-link:last-child {
+    @apply mr-0;
+}
+
+/* Navbar Buttons */
+.nav-btn {
+    @apply inline-block text-sm no-underline px-4 py-2 leading-none border rounded text-white border-white;
+}
+.nav-btn:hover {
+    @apply border-transparent text-teal bg-white;
+}

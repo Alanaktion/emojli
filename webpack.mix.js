@@ -14,11 +14,10 @@ const tailwindcss = require('tailwindcss');
 
 mix.js('resources/js/app.js', 'public/js')
     .extract(['vue', 'vue-router', 'lodash', 'axios'])
-    .sass('resources/sass/app.scss', 'public/css')
-    .options({
-        processCssUrls: false,
-        postCss: [ tailwindcss('./tailwind.js') ],
-    });
+    .postCss('resources/css/app.css', 'public/css', [
+        require('postcss-easy-import'),
+        tailwindcss('tailwind.js'),
+    ]);
 
 if (mix.inProduction()) {
     mix.version();

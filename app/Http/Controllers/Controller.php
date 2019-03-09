@@ -10,14 +10,4 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    /**
-     * Single-page application app route
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function app()
-    {
-        return view('welcome');
-    }
 }

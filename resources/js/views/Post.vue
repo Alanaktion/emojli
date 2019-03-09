@@ -1,12 +1,12 @@
 <template>
     <div>
         <div v-if="post && post.title">
-            <h1>{{ post.title }}</h1>
+            <h2>{{ post.title }}</h2>
             <p>{{ post.body }}</p>
             <p>{{ post.id }}</p>
         </div>
         <div v-else>
-            <h1>Loading post&hellip;</h1>
+            <p>Loading post&hellip;</p>
         </div>
     </div>
 </template>

@@ -17,6 +17,13 @@ composer install
 npm ci
 ```
 
+If you haven't manually set your crypto keys:
+
+```bash
+php artisan key:generate
+php artisan jwt:secret
+```
+
 ### Development
 
 ```bash
