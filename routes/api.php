@@ -29,7 +29,11 @@ Route::get('posts/{post}', 'PostController@show');
 Route::get('users', 'UserController@index');
 Route::get('users/{user}', 'UserController@show');
 Route::get('users/{user}/posts', 'UserController@posts');
+Route::get('users/{user}/followers', 'UserController@followers');
+Route::get('users/{user}/following', 'UserController@following');
 
 Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::post('posts', 'PostController@store');
+    Route::post('users/{user}/follow', 'UserController@follow');
+    Route::post('users/{user}/unfollow', 'UserController@unfollow');
 });

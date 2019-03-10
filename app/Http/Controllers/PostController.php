@@ -11,11 +11,24 @@ class PostController extends Controller
     /**
      * Get the most recent posts
      *
+     * If authenticated, this is limited to posts by users the user is following
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        if (!Auth::check()) {
+            return Post::with('user')
+                ->latest()
+                ->simplePaginate(30);
+        }
+
+        $userIds = Auth::user()->following->pluck('id')->toArray();
+        array_unshift($userIds, Auth::id());
         return Post::with('user')
+            ->whereHas('user', function ($query) use ($userIds) {
+                $query->whereIn('user_id', [Auth::id()] + $userIds);
+            })
             ->latest()
             ->simplePaginate(30);
     }
@@ -40,6 +53,7 @@ class PostController extends Controller
      */
     public function store(Request $request): Post
     {
+        // TODO: validate post content, requiring at least one character and matching emoji
         $post = Auth::user()->posts()->create($request->only('body'));
         $post->loadMissing('user');
         return $post;

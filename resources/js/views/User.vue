@@ -11,6 +11,14 @@
                         Log out
                     </button>
                 </div>
+                <div v-else-if="$auth.check()">
+                    <button type="button" @click="follow" class="btn btn-primary" v-if="!user.following">
+                        Follow
+                    </button>
+                    <button type="button" @click="unfollow" class="btn btn-secondary" v-else>
+                        Unfollow
+                    </button>
+                </div>
             </div>
 
             <post-card class="mb-4"
@@ -42,12 +50,12 @@ export default {
     },
     filters: {
         fromNow(date) {
-            return moment.utc(date).fromNow();
+            return moment.utc(date).fromNow()
         },
     },
     methods: {
         getUser(username) {
-            this.user = null;
+            this.user = null
             axios(this.endpoint + encodeURI(username))
                 .then(response => {
                     this.user = response.data
@@ -57,9 +65,9 @@ export default {
                 })
         },
         getPosts(username) {
-            this.posts = [];
-            this.page = 0;
-            this.nextPage = null;
+            this.posts = []
+            this.page = 0
+            this.nextPage = null
             axios(this.endpoint + encodeURI(username) + '/posts')
                 .then(response => {
                     let { data } = response
@@ -74,15 +82,27 @@ export default {
         addPost(post) {
             this.posts.unshift(post)
         },
+        follow() {
+            axios.post(this.endpoint + encodeURI(this.username) + '/follow')
+                .then(() => {
+                    this.user.following = true
+                })
+        },
+        unfollow() {
+            axios.post(this.endpoint + encodeURI(this.username) + '/unfollow')
+                .then(() => {
+                    this.user.following = false
+                })
+        },
     },
     created() {
-        this.getUser(this.username);
-        this.getPosts(this.username);
+        this.getUser(this.username)
+        this.getPosts(this.username)
     },
     watch: {
         '$route'() {
-            this.getUser(this.username);
-            this.getPosts(this.username);
+            this.getUser(this.username)
+            this.getPosts(this.username)
         }
     }
 }
