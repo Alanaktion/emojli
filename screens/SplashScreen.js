@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button as NativeButton } from 'react-native';
+import { StyleSheet, Text, View, Button as NativeButton, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import NavOptions from '../constants/NavOptions';
@@ -11,11 +11,13 @@ export default class SplashScreen extends React.Component {
     return {
       title: 'Emojli',
       headerRight: (
-        <NativeButton
-          onPress={() => navigation.navigate('Login')}
-          title="Log in"
-          color="#fff"
-        />
+        <View style={{ paddingRight: 15 }}>
+          <NativeButton
+            onPress={() => navigation.navigate('Login')}
+            title="Log in"
+            color={Platform.OS === 'ios' ? '#fff' : Colors.buttonBg}
+            />
+        </View>
       ),
       ...NavOptions
     };

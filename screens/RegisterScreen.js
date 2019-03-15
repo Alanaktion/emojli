@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import axios from 'axios';
 
 import NavOptions from '../constants/NavOptions';
 import Colors from '../constants/Colors';
+import Input from '../components/Input';
 import Button from '../components/Button';
 
 export default class HomeScreen extends React.Component {
@@ -15,7 +17,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        {/* TODO: add login UI */}
+        {/* TODO: add registration form */}
       </SafeAreaView>
     );
   }
