@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Constants } from 'expo';
 import { SafeAreaView } from 'react-navigation';
 import axios from 'axios';
 
@@ -20,8 +21,26 @@ export default class HomeScreen extends React.Component {
     ...NavOptions
   };
 
-  async logInAsync() {
-    //
+  logInAsync = async () => {
+    let response;
+    try {
+      response = await axios.post('auth/login', {
+        username: this.state.username,
+        password: this.state.password,
+      });
+      if (response.data.status !== 'success') {
+        throw 'invalid login';
+      }
+    } catch (e) {
+      Alert.alert('Invalid login', 'Your username or password is incorrect.');
+      return;
+    }
+    const token = response.headers.authorization;
+    await AsyncStorage.setItem('userToken', token);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    response = await axios.get('auth/user');
+    await AsyncStorage.setItem('user', JSON.stringify(response.data.data));
+    this.props.navigation.navigate('App');
   };
 
   render() {

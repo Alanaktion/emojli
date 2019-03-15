@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, AsyncStorage, StatusBar, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import axios from 'axios';
 
 import AppStack from './MainNavigator';
 import AuthStack from './AuthNavigator';
@@ -14,6 +15,9 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
+    if (userToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
+    }
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.

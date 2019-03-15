@@ -1,7 +1,12 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font } from 'expo';
+import { AppLoading, Asset, Constants, Font } from 'expo';
+import axios from 'axios';
+
 import AppNavigator from './navigation/AppNavigator';
+
+const { apiEndpoint } = Constants.manifest.extra;
+axios.defaults.baseURL = apiEndpoint;
 
 export default class App extends React.Component {
   state = {

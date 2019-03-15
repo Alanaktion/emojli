@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontSize: 16,
     color: Colors.text,
+    backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: Colors.buttonSecondaryBg,
     borderRadius: 4,
