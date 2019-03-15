@@ -82,6 +82,9 @@ export default {
         addPost(post) {
             this.posts.unshift(post)
         },
+        deletePost(post) {
+            this.posts.splice(_.findIndex(this.posts, p => (p.id == post.id)), 1)
+        },
         follow() {
             axios.post(this.endpoint + encodeURI(this.username) + '/follow')
                 .then(() => {

@@ -36,4 +36,5 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::post('posts', 'PostController@store');
     Route::post('users/{user}/follow', 'UserController@follow');
     Route::post('users/{user}/unfollow', 'UserController@unfollow');
+    Route::delete('posts/{post}', 'PostController@delete');
 });

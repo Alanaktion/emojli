@@ -1,16 +1,20 @@
 <template>
-    <div class="card flex">
-        <img class="w-10 h-10 rounded-full mr-4" :src="post.user.gravatar">
+    <div class="card post">
+        <img class="avatar" :src="post.user.gravatar">
         <div class="flex-grow">
-            <div class="mb-2">
-                <router-link class="text-grey-darkest text-lg no-underline mr-1"
+            <div class="post-meta">
+                <router-link class="mr-1"
                     :to="`/users/${post.user.username}`">
                     {{ post.user.username }}
                 </router-link>
-                <router-link class="text-grey text-sm no-underline"
+                <router-link class="text-grey text-sm"
                     :to="`/posts/${post.id}`">
                     {{ post.created_at | fromNow }}
                 </router-link>
+                <button class="ml-auto" @click="deletePost"
+                    v-if="$auth.user().username == post.user.username">
+                    Delete
+                </button>
             </div>
             <p class="text-base">
                 <span class="whitespace-pre-wrap">{{ post.body }}</span>
@@ -26,17 +30,38 @@ export default {
     },
     filters: {
         fromNow(date) {
-            return moment.utc(date).fromNow();
+            return moment.utc(date).fromNow()
+        },
+    },
+    methods: {
+        deletePost() {
+            let del = confirm('Are you sure you want to delete this post?')
+            if (!del) {
+                return
+            }
+            axios.post(`/posts/${this.post.id}`, { '_method': 'delete' })
+                .then(() => {
+                    if (this.$route.name == 'post') {
+                        this.$router.push({
+                            name: 'user',
+                            params: {
+                                username: this.post.user.username,
+                            },
+                        });
+                    } else {
+                        this.$parent.deletePost(this.post)
+                    }
+                })
         },
     },
     mounted() {
         // Force updates on recent posts to keep timestamps accurate
         if (moment.utc(this.post.created_at).add(2, 'h').isAfter(moment())) {
-            this.interval = setInterval(() => this.$forceUpdate(), 5e3);
+            this.interval = setInterval(() => this.$forceUpdate(), 5e3)
         }
     },
     beforeDestroy() {
-        this.interval && clearInterval(this.interval);
+        this.interval && clearInterval(this.interval)
     },
 }
 </script>

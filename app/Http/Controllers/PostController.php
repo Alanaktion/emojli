@@ -58,4 +58,21 @@ class PostController extends Controller
         $post->loadMissing('user');
         return $post;
     }
+
+    /**
+     * Delete a post
+     *
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Post $post)
+    {
+        if ($post->user_id != Auth::id()) {
+            return abort(403);
+        }
+        $post->delete();
+        return response([
+            'success' => true,
+        ]);
+    }
 }

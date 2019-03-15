@@ -33,6 +33,9 @@ export default {
         addPost(post) {
             this.posts.unshift(post)
         },
+        deletePost(post) {
+            this.posts.splice(_.findIndex(this.posts, p => (p.id == post.id)), 1)
+        },
     },
     created() {
         this.getPosts()

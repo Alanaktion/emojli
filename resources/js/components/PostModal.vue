@@ -46,7 +46,7 @@ export default {
                     }
 
                     // TODO: show confirmation that post was created
-
+                    this.body = '';
                     this.hide()
                 })
                 .catch(error => {

@@ -1,0 +1,25 @@
+.post {
+    @apply flex;
+}
+.post .avatar {
+    @apply w-10 h-10 rounded-full mr-4;
+}
+.post-meta {
+    @apply mb-2 flex items-end;
+}
+.post-meta a {
+    @apply no-underline;
+}
+.post-meta a:first-child {
+    @apply text-grey-darkest text-lg;
+}
+.post-meta button {
+    @apply text-grey-dark ml-auto invisible;
+}
+.post-meta button:hover,
+.post-meta button:focus {
+    @apply text-teal-darker;
+}
+.post:hover .post-meta button {
+    @apply visible;
+}
