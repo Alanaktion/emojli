@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Kozz\Components\Emoji\EmojiParser;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterFormRequest extends FormRequest
 {
@@ -23,8 +25,16 @@ class RegisterFormRequest extends FormRequest
      */
     public function rules()
     {
+        $emoji = new EmojiParser();
+        $emoji->setPrepend('^');
+        $emoji->setAppend('$');
         return [
-            'username' => 'required|string|unique:users',
+            'username' => [
+                'required',
+                'string',
+                'unique:users',
+                'regex:' . $emoji->getPattern(),
+            ],
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
         ];

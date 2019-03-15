@@ -65,7 +65,7 @@ export default {
             while (match = regex.exec(newVal)) {
                 outVal += match[0]
             }
-            this.body = outVal
+            this.username = outVal
         },
     },
     methods: {
