@@ -57,6 +57,17 @@ export default {
             success: false,
         };
     },
+    watch: {
+        username(newVal) {
+            let outVal = ''
+            let match
+            const regex = emojiRegex()
+            while (match = regex.exec(newVal)) {
+                outVal += match[0]
+            }
+            this.body = outVal
+        },
+    },
     methods: {
         register(){
             this.$auth.register({

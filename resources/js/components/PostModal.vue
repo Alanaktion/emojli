@@ -28,6 +28,17 @@ export default {
             endpoint: '/posts',
         }
     },
+    watch: {
+        body(newVal) {
+            let outVal = ''
+            let match
+            const regex = emojiRegex()
+            while (match = regex.exec(newVal)) {
+                outVal += match[0]
+            }
+            this.body = outVal
+        },
+    },
     methods: {
         post() {
             axios.post(this.endpoint, {
@@ -46,7 +57,7 @@ export default {
                     }
 
                     // TODO: show confirmation that post was created
-                    this.body = '';
+                    this.body = ''
                     this.hide()
                 })
                 .catch(error => {
