@@ -9,10 +9,10 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <script src="{{ asset('js/manifest.js') }}" defer></script>
-        <script src="{{ asset('js/vendor.js') }}" defer></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ mix('js/manifest.js') }}" defer></script>
+        <script src="{{ mix('js/vendor.js') }}" defer></script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
         <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
         <meta name="theme-color" content="#4dc0b5">
