@@ -25,7 +25,7 @@
       "**/*"
     ],
     "ios": {
-      "package": "com.phpizza.emojli",
+      "bundleIdentifier": "com.phpizza.emojli",
       "supportsTablet": true
     },
     "android": {
