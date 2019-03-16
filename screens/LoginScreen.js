@@ -22,6 +22,15 @@ export default class HomeScreen extends React.Component {
   };
 
   logInAsync = async () => {
+    if (!this.state.username) {
+      this._usernameInput && this._usernameInput._root.focus();
+      return;
+    }
+    if (!this.state.password) {
+      this._passwordInput && this._passwordInput._root.focus();
+      return;
+    }
+
     let response;
     try {
       response = await axios.post('auth/login', {
@@ -50,15 +59,25 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.label}>Username</Text>
           <Input
             onChangeText={username => this.setState({username})}
+            autoCorrect={false}
             value={this.state.username}
             style={{ marginTop: 10 }}
+            onSubmitEditing={() => {
+              this._passwordInput && this._passwordInput._root.focus();
+            }}
+            blurOnSubmit={false}
+            ref={ref => { this._usernameInput = ref }}
             returnKeyType="next"
+            autoFocus
           />
           <Text style={styles.label}>Password</Text>
           <Input
             onChangeText={password => this.setState({password})}
             value={this.state.password}
             style={{ marginTop: 10 }}
+            onSubmitEditing={this.logInAsync}
+            blurOnSubmit={true}
+            ref={ref => { this._passwordInput = ref }}
             returnKeyType="go"
             secureTextEntry={true}
           />

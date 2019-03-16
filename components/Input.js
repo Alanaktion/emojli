@@ -12,6 +12,7 @@ export default class Input extends React.Component {
     return (
       <TextInput
         {...this.props}
+        ref={c => {this._root = c}}
         style={[
           styles.input,
           this.state.focused && styles.focusedInput,

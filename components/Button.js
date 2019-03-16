@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 
@@ -12,11 +12,12 @@ export default class Button extends React.Component {
     if (Platform.OS === 'android') {
       return (
         <TouchableNativeFeedback
-          {...this.props}
-          style={buttonStyle}>
-          <Text style={labelStyle}>
-            {this.props.title}
-          </Text>
+          {...this.props}>
+          <View style={buttonStyle}>
+            <Text style={labelStyle}>
+              {this.props.title}
+            </Text>
+          </View>
         </TouchableNativeFeedback>
       );
     }

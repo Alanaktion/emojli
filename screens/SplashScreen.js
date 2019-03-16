@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button as NativeButton, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import NavOptions from '../constants/NavOptions';
 import Colors from '../constants/Colors';
+import NavButton from '../components/NavButton';
 import Button from '../components/Button';
 
 export default class SplashScreen extends React.Component {
@@ -12,7 +13,7 @@ export default class SplashScreen extends React.Component {
       title: 'Emojli',
       headerRight: (
         <View style={{ paddingRight: 15 }}>
-          <NativeButton
+          <NavButton
             onPress={() => navigation.navigate('Login')}
             title="Log in"
             color={Platform.OS === 'ios' ? '#fff' : Colors.buttonBg}
