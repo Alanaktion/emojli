@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use Kozz\Components\Emoji\EmojiParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -55,14 +54,11 @@ class PostController extends Controller
      */
     public function store(Request $request): Post
     {
-        $emoji = new EmojiParser();
-        $emoji->setPrepend('^');
-        $emoji->setAppend('$');
         Validator::make($request->all(), [
             'body' => [
                 'required',
                 'string',
-                'regex:' . $emoji->getPattern(),
+                'regex:' . config('app.emoji_regex'),
             ],
         ])->validate();
 

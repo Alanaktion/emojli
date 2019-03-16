@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70a713ec638459d238822576be005c2d",
+    "content-hash": "2fc4dda74d711df9996e47eeb01f142f",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -453,61 +453,6 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
-        },
-        {
-            "name": "kozz/emoji-regex",
-            "version": "0.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/urakozz/php-emoji-regex.git",
-                "reference": "23bbac0f1e7ad2768744ab97d7557e5025991057"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/urakozz/php-emoji-regex/zipball/23bbac0f1e7ad2768744ab97d7557e5025991057",
-                "reference": "23bbac0f1e7ad2768744ab97d7557e5025991057",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "phpunit/phpunit": "~4.2"
-            },
-            "suggest": {
-                "php": ">=5.6.8"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Kozz\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Yury Kozyrev",
-                    "email": "urakozz@gmail.com",
-                    "homepage": "https://github.com/urakozz"
-                }
-            ],
-            "description": "Emoji regex parser",
-            "homepage": "https://github.com/urakozz/php-emoji-regex",
-            "keywords": [
-                "emoji",
-                "regex",
-                "regexp"
-            ],
-            "time": "2016-11-16T21:30:56+00:00"
         },
         {
             "name": "laravel/framework",
