@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Emojli",
+    "description": "A weird social network.",
     "slug": "emojli",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -8,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -24,9 +25,12 @@
       "**/*"
     ],
     "ios": {
+      "package": "com.phpizza.emojli",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.phpizza.emojli",
+      "versionCode": 12,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon-fg.png",
         "backgroundColor": "#4dc0b5"
