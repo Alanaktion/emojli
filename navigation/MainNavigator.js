@@ -1,12 +1,29 @@
 import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
+import PostModalScreen from '../screens/PostModalScreen';
 
 export default createStackNavigator(
   {
-    Home: HomeScreen,
+    App: createStackNavigator(
+      {
+        Home: HomeScreen,
+      },
+      {
+        initialRouteName: 'Home',
+      }
+    ),
+    Modal: createStackNavigator(
+      {
+        PostModal: PostModalScreen,
+      },
+      {
+        initialRouteName: 'PostModal',
+      }
+    ),
   },
   {
-    initialRouteName: 'Home',
+    mode: 'modal',
+    headerMode: 'none',
   }
 );

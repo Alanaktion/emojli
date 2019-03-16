@@ -34,7 +34,7 @@
       "icon": "./assets/images/icon-android.png"
     },
     "extra": {
-      "apiEndpoint": "https://emojli.phpizza.com/api/"
+      "apiEndpoint": "https://emojli.phpizza.com/api"
     }
   }
 }

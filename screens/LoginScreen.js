@@ -1,9 +1,10 @@
 import React from 'react';
 import { Alert, AsyncStorage, Dimensions, StyleSheet, Text, View } from 'react-native';
-import { Constants } from 'expo';
 import { SafeAreaView } from 'react-navigation';
+import emojiRegex from 'emoji-regex';
 import axios from 'axios';
 
+import { logIn, getUser } from '../lib/api';
 import NavOptions from '../constants/NavOptions';
 import Colors from '../constants/Colors';
 import Input from '../components/Input';
@@ -21,6 +22,18 @@ export default class HomeScreen extends React.Component {
     ...NavOptions
   };
 
+  change = input => {
+    const regex = emojiRegex();
+    let username = '';
+    let match;
+    while (match = regex.exec(input)) {
+      username += match[0];
+    }
+    this.setState({
+      username,
+    });
+  };
+
   logInAsync = async () => {
     if (!this.state.username) {
       this._usernameInput && this._usernameInput._root.focus();
@@ -31,24 +44,14 @@ export default class HomeScreen extends React.Component {
       return;
     }
 
-    let response;
     try {
-      response = await axios.post('auth/login', {
-        username: this.state.username,
-        password: this.state.password,
-      });
-      if (response.data.status !== 'success') {
-        throw 'invalid login';
-      }
+      await logIn(this.state.username, this.state.password);
     } catch (e) {
       Alert.alert('Invalid login', 'Your username or password is incorrect.');
       return;
     }
-    const token = response.headers.authorization;
-    await AsyncStorage.setItem('userToken', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    response = await axios.get('auth/user');
-    await AsyncStorage.setItem('user', JSON.stringify(response.data.data));
+    const userResponse = await getUser();
+    await AsyncStorage.setItem('user', JSON.stringify(userResponse.data.data));
     this.props.navigation.navigate('App');
   };
 
@@ -58,7 +61,7 @@ export default class HomeScreen extends React.Component {
         <View style={styles.form}>
           <Text style={styles.label}>Username</Text>
           <Input
-            onChangeText={username => this.setState({username})}
+            onChangeText={this.change}
             autoCorrect={false}
             value={this.state.username}
             style={{ marginTop: 10 }}

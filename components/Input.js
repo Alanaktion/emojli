@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, StyleSheet, Text } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 
 import Colors from '../constants/Colors';
 
@@ -29,7 +29,6 @@ export default class Input extends React.Component {
 const styles = StyleSheet.create({
   input: {
     width: '100%',
-    height: 36,
     paddingHorizontal: 12,
     paddingVertical: 8,
     fontSize: 16,
