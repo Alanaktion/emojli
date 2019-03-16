@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
+import { Constants } from 'expo';
 import { SafeAreaView } from 'react-navigation';
 
 import NavOptions from '../constants/NavOptions';
 import Colors from '../constants/Colors';
 import NavButton from '../components/NavButton';
 import Button from '../components/Button';
+
+const { apiEndpoint } = Constants.manifest.extra;
 
 export default class SplashScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -37,7 +40,10 @@ export default class SplashScreen extends React.Component {
           <Button
             title="Join Emojli"
             style={{ marginBottom: 15 }}
-            onPress={() => this.props.navigation.navigate('Register')}
+            onPress={() => {
+              // this.props.navigation.navigate('Register');
+              Linking.openURL(apiEndpoint.substr(0, -3));
+            }}
           />
           {/* <Button
             title="Log in with Google"

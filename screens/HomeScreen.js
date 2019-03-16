@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, FlatList, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { AsyncStorage, FlatList, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { refresh, loadPosts } from '../lib/api';
@@ -18,17 +18,27 @@ export default class HomeScreen extends React.Component {
   };
 
   static navigationOptions = ({ navigation }) => {
-    // TODO: move user touchable to the left on iOS
+    const user = navigation.getParam('user');
+    const userButton = (
+      <View style={{ marginHorizontal: 15 }}>
+        <TouchableOpacity
+          accessibilityLabel="Me"
+          onPress={() => {
+            navigation.navigate('User', {
+              user: user,
+              me: true,
+            });
+          }}>
+          <Text>{user && user.username}</Text>
+        </TouchableOpacity>
+      </View>
+    );
     return {
+      headerLeft: Platform.OS === 'ios' && userButton,
       title: 'Emojli',
       headerRight: (
         <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-          <TouchableWithoutFeedback
-            accessibilityLabel="Me"
-            onPress={() => {}}>
-            <Text>{navigation.getParam('username')}</Text>
-          </TouchableWithoutFeedback>
-          <View style={{ width: 15 }} />
+          {Platform.OS === 'android' && userButton}
           <NavButton
             title="Post"
             onPress={() => navigation.navigate('PostModal')}
@@ -47,7 +57,7 @@ export default class HomeScreen extends React.Component {
     });
     const { navigation } = this.props;
     navigation.setParams({
-      username: user.username,
+      user,
     });
 
     // Refresh token
@@ -78,18 +88,22 @@ export default class HomeScreen extends React.Component {
     })
   }
 
+  showUser = (user) => {
+    this.props.navigation.navigate('User', {user});
+  }
+
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
         <FlatList
           style={{ flex: 1 }}
-          contentContainerStyle={{ padding: 15, paddingBottom: 0 }}
+          contentContainerStyle={{ padding: 15, paddingBottom: 34 }}
           refreshing={this.state.refreshing}
           onRefresh={this.loadPosts}
           data={this.state.posts}
           keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => <Post post={item} />}
-          />
+          renderItem={({item}) => <Post post={item} onUserPress={this.showUser} />}
+        />
       </SafeAreaView>
     );
   }

@@ -2,11 +2,15 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Constants, Font } from 'expo';
 import axios from 'axios';
+import Sentry from 'sentry-expo';
 
-import AppNavigator from './navigation/AppNavigator';
+import RootNavigator from './navigation/RootNavigator';
 
-const { apiEndpoint } = Constants.manifest.extra;
+const { apiEndpoint, sentryDsn } = Constants.manifest.extra;
 axios.defaults.baseURL = apiEndpoint;
+if (sentryDsn) {
+  Sentry.config(sentryDsn).install();
+}
 
 export default class App extends React.Component {
   state = {
@@ -26,7 +30,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-          <AppNavigator />
+          <RootNavigator />
         </View>
       );
     }
