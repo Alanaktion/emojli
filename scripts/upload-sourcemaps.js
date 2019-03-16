@@ -1,8 +1,5 @@
-import uploadSourcemaps from 'sentry-expo/upload-sourcemaps';
-import dotenv from 'dotenv';
+require('dotenv').config();
 
-dotenv.config();
-
-export default async options => {
-  await uploadSourcemaps(options);
+module.exports = async options => {
+  await require('sentry-expo/upload-sourcemaps')(options);
 };
