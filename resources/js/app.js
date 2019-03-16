@@ -20,6 +20,11 @@ const router = new VueRouter({
             },
         },
         {
+            path: '/privacy',
+            name: 'privacy',
+            component: require('./views/Privacy.vue').default,
+        },
+        {
             path: '/home',
             name: 'home',
             component: require('./views/Home.vue').default,
