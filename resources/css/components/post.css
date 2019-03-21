@@ -11,14 +11,14 @@
     @apply no-underline;
 }
 .post-meta a:first-child {
-    @apply text-grey-darkest text-lg;
+    @apply text-gray-900 text-lg;
 }
 .post-meta button {
-    @apply text-grey-dark ml-auto invisible;
+    @apply text-gray-600 ml-auto invisible;
 }
 .post-meta button:hover,
 .post-meta button:focus {
-    @apply text-teal-darker;
+    @apply text-teal-800;
 }
 .post:hover .post-meta button {
     @apply visible;

@@ -2,8 +2,8 @@
     @apply border-l-4 px-4 py-3 shadow-md mb-4;
 }
 .alert-error {
-    @apply bg-red-lightest border-red-light text-red-dark;
+    @apply bg-red-100 border-red-300 text-red-600;
 }
 .alert-success {
-    @apply bg-teal-lightest border-teal text-teal-darkest;
+    @apply bg-teal-100 border-teal-500 text-teal-900;
 }

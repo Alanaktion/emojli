@@ -1,5 +1,5 @@
 .stretched-link::after {
     content: '';
-    @apply absolute pin bg-transparent;
+    @apply absolute inset-0 bg-transparent;
     z-index: 1;
 }

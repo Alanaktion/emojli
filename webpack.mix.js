@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .extract(['vue', 'vue-router', 'lodash', 'axios'])
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-easy-import'),
-        tailwindcss('tailwind.js'),
+        require('tailwindcss')('./resources/tailwind.config.js'),
     ]);
 
 if (mix.inProduction()) {

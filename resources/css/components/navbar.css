@@ -1,6 +1,6 @@
 /* Navbar */
 .navbar {
-    @apply sticky pin-t bg-teal py-6 select-none;
+    @apply sticky top-0 bg-teal-500 py-6 select-none;
 }
 .nav-container {
     @apply flex items-center justify-between flex-wrap;
@@ -11,7 +11,7 @@
 
 /* Navbar Links */
 .nav-link {
-    @apply text-sm text-teal-lightest mr-4 no-underline;
+    @apply text-sm text-teal-100 mr-4 no-underline;
 }
 .nav-link:hover {
     @apply text-white underline;
@@ -25,5 +25,5 @@
     @apply text-sm border text-white border-white;
 }
 .btn-nav:hover {
-    @apply border-transparent text-teal bg-white;
+    @apply border-transparent text-teal-500 bg-white;
 }

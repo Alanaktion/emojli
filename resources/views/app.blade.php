@@ -17,7 +17,7 @@
         <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
         <meta name="theme-color" content="#4dc0b5">
     </head>
-    <body class="bg-grey-lighter text-grey-darker font-sans">
+    <body class="bg-gray-200 text-gray-800 font-sans">
         <div id="app">
             <app-nav>
                 <div class="navbar">

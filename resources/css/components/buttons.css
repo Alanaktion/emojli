@@ -8,18 +8,18 @@
 
 /* Primary */
 .btn-primary {
-    @apply bg-indigo text-white;
+    @apply bg-indigo-500 text-white;
 }
 .btn-primary:hover {
-    @apply bg-indigo-dark;
+    @apply bg-indigo-600;
 }
 
 /* Secondary */
 .btn-secondary {
-    @apply font-normal bg-grey-light text-grey-darkest;
+    @apply font-normal bg-gray-300 text-gray-900;
 }
 .btn-secondary:hover {
-    @apply bg-grey;
+    @apply bg-gray-500;
 }
 
 /* Sizes */
@@ -30,8 +30,8 @@
 /* Link */
 /* Does not use generic button styles */
 .link-btn {
-    @apply inline-block align-baseline font-bold text-sm text-indigo;
+    @apply inline-block align-baseline font-bold text-sm text-indigo-500;
 }
 .link-btn:hover {
-    @apply text-indigo-darker;
+    @apply text-indigo-800;
 }
